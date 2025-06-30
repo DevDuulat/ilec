@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Education - Обучение за рубежом</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .dropdown-menu {
+        transition: all 0.2s ease;
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: #800f12;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover:after {
+        width: 100%;
+      }
+      .hero-clip-path {
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      }
+      .hero-image-container {
+        perspective: 1000px;
+      }
+      .hero-image {
+        transform: rotateY(-10deg) rotateX(5deg);
+        box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.2);
+        transition: all 0.5s ease;
+      }
+      .hero-image:hover {
+        transform: rotateY(0) rotateX(0);
+      }
+      .gradient-text {
+        background: linear-gradient(90deg, #800f12 0%, #d0272a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+    </style>
+  </head>
+  <body class="font-sans bg-white">
+    <!-- Хедер (ваш предыдущий код) -->
+    <!-- Шапка сайта -->
+    <header class="sticky top-0 z-50">
+      <!-- Единый уровень с прозрачным белым фоном и блюром -->
+      <div class="bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <!-- Логотип -->
+            <div class="flex items-center">
+              <a href="#" class="text-2xl font-bold text-gray-900">
+                <span class="text-[#800F12]">ILEC</span>
+              </a>
+              <span
+                class="ml-2 hidden rounded bg-[#800F12] px-2 py-1 text-xs text-white md:inline-block"
+                >since 2010</span
+              >
+            </div>
+
+            <!-- Основная навигация -->
+            <nav class="hidden items-center space-x-6 md:flex">
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Главная</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Курсы</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Работа в Германии</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Отзывы</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Визовая поддержка</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >О нас</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Услуги</a
+              >
+              <a
+                href="#"
+                class="apple-nav-link text-gray-600 hover:text-gray-900"
+                >Контакты</a
+              >
+
+              <!-- Выпадающий список языка -->
+              <div class="dropdown relative">
+                <button
+                  class="apple-nav-link flex items-center space-x-1 text-gray-600 hover:text-gray-900 focus:outline-none"
+                  onclick="toggleLanguageDropdown()"
+                >
+                  <span>RU</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3 w-3"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <div
+                  id="languageDropdown"
+                  class="dropdown-menu absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white py-1 shadow-lg hidden opacity-0 transition-all duration-200 border border-gray-200"
+                >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Русский (RU)</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >English (EN)</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Deutsch (DE)</a
+                  >
+                </div>
+              </div>
+
+              <!-- Кнопка заявки -->
+              <button
+                class="rounded-lg bg-[#800F12] px-5 py-2 font-medium text-white hover:bg-[#5C0B0D] text-sm"
+              >
+                Оставить заявку
+              </button>
+            </nav>
+
+            <!-- Мобильное меню -->
+            <button
+              class="rounded p-2 text-gray-600 hover:bg-gray-100 md:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <style>
+      .apple-nav-link {
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 1;
+        height: 44px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        padding: 0 8px;
+        background: no-repeat;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.32s cubic-bezier(0.4, 0, 0.6, 1);
+      }
+    </style>
+
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-[#f9f9f9] z-0"></div>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8 py-20 md:py-28">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Текстовая часть -->
+          <div class="relative z-10">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+            >
+              <span class="gradient-text">Обучение</span> за рубежом -
+              <span class="text-[#202124]">ваш путь</span> к успешной карьере
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-lg">
+              Получите престижное образование и работу в Германии с нашей
+              поддержкой. Мы сопровождаем вас на всех этапах - от выбора вуза до
+              трудоустройства.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="bg-[#800F12] hover:bg-[#5C0B0D] text-white px-8 py-3 rounded-xl font-medium transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+              >
+                Бесплатная консультация
+              </button>
+              <button
+                class="border-2 border-[#800F12] text-[#800F12] hover:bg-[#800F12] hover:text-white px-8 py-3 rounded-xl font-medium transition-all transform hover:-translate-y-1"
+              >
+                Все услуги →
+              </button>
+            </div>
+            <div class="mt-12 flex items-center space-x-8">
+              <div class="flex items-center">
+                <div class="flex -space-x-2">
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-white"
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt=""
+                  />
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-white"
+                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    alt=""
+                  />
+                  <img
+                    class="w-10 h-10 rounded-full border-2 border-white"
+                    src="https://randomuser.me/api/portraits/women/68.jpg"
+                    alt=""
+                  />
+                </div>
+                <span class="ml-3 text-sm text-gray-500"
+                  >500+ студентов уже с нами</span
+                >
+              </div>
+              <div class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-yellow-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <span class="ml-1 text-sm text-gray-500"
+                  >4.9/5 (127 отзывов)</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Изображение -->
+          <div class="hero-image-container relative lg:pl-10">
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                alt="Студенты за рубежом"
+                class="hero-image w-full h-auto rounded-2xl border-4 border-white"
+              />
+              <div
+                class="absolute -bottom-6 -left-6 bg-[#800F12] text-white px-6 py-3 rounded-xl shadow-lg z-20"
+              >
+                <div class="text-sm">Германия</div>
+                <div class="font-bold">Топ-10 вузов</div>
+              </div>
+              <div
+                class="absolute -top-6 -right-6 bg-white text-[#202124] px-6 py-3 rounded-xl shadow-lg z-20 border border-gray-100"
+              >
+                <div class="text-sm">Трудоустройство</div>
+                <div class="font-bold">87% успеха</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-100 py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <!-- Карточка 1 -->
+          <div
+            class="rounded-xl bg-white p-6 md:p-8 md:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+          >
+            <h3
+              class="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4"
+            >
+              Программа "Будущее в Германии"
+            </h3>
+            <p
+              class="text-gray-700 text-sm md:text-base leading-relaxed md:leading-loose"
+            >
+              Поддержка студентов на всех этапах: от выбора вуза до устройства
+              на работу. Подготовка документов, визовая помощь, языковые курсы и
+              сопровождение после переезда.
+            </p>
+          </div>
+
+          <!-- Карточка 2 -->
+          <div
+            class="rounded-xl bg-white p-6 md:p-8 md:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+          >
+            <h3
+              class="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4"
+            >
+              Гарантированные приглашения
+            </h3>
+            <p
+              class="text-gray-700 text-sm md:text-base leading-relaxed md:leading-loose"
+            >
+              Более 800 успешных поступлений в топовые вузы Европы. Мы
+              сотрудничаем с государственными и частными университетами
+              Германии, Австрии, Нидерландов.
+            </p>
+          </div>
+
+          <!-- Карточка 3 -->
+          <div
+            class="rounded-xl bg-white p-6 md:p-8 md:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+          >
+            <h3
+              class="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4"
+            >
+              Профессиональная адаптация
+            </h3>
+            <p
+              class="text-gray-700 text-sm md:text-base leading-relaxed md:leading-loose"
+            >
+              Консультации по трудоустройству, составление резюме, стажировки и
+              помощь с поиском работы. Более 87% наших студентов находят работу
+              в первые 6 месяцев.
+            </p>
+          </div>
+
+          <!-- Карточка 4 -->
+          <div
+            class="rounded-xl bg-white p-6 md:p-8 md:rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100"
+          >
+            <h3
+              class="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4"
+            >
+              Финансовая поддержка и стипендии
+            </h3>
+            <p
+              class="text-gray-700 text-sm md:text-base leading-relaxed md:leading-loose"
+            >
+              Помощь в получении стипендий и грантов. Средняя сумма стипендий —
+              $8 500 в год. Мы подбираем программы под ваш бюджет и возможности.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-100 py-16 md:py-24">
+      <div
+        class="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-b from-white to-transparent z-10"
+      ></div>
+
+      <div class="relative max-w-4xl mx-auto">
+        <h2
+          class="text-4xl md:text-[3rem] font-bold text-gray-900 mb-4 md:mb-6 text-center leading-tight md:leading-none"
+        >
+          Что говорит руководство ILEC
+        </h2>
+
+        <p
+          class="text-xl md:text-[1.875rem] leading-normal md:leading-[2.25rem] text-gray-800 text-center mb-8 md:mb-12 max-w-2xl mx-auto"
+        >
+          Мы создаём стратегию выхода на международный рынок.
+        </p>
+
+        <div
+          class="bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-6 md:p-10 lg:p-12 text-left border border-gray-100 relative z-10 transition-all duration-300 hover:shadow-xl"
+        >
+          <div class="absolute -top-6 -left-6 w-16 h-16">
+            <svg
+              viewBox="0 0 64 64"
+              fill="#800F12"
+              xmlns="http://www.w3.org/2000/svg"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+            >
+              <path
+                d="M27.194,12l0,8.025c-2.537,0.14 -4.458,0.603 -5.761,1.39c-1.304,0.787 -2.22,2.063 -2.749,3.829c-0.528,1.766 -0.793,4.292 -0.793,7.579l9.303,0l0,19.145l-19.081,0l0,-18.201c0,-7.518 1.612,-13.025 4.836,-16.522c3.225,-3.497 7.973,-5.245 14.245,-5.245Zm28.806,0l0,8.025c-2.537,0.14 -4.457,0.586 -5.761,1.338c-1.304,0.751 -2.247,2.028 -2.828,3.829c-0.581,1.8 -0.872,4.344 -0.872,7.631l9.461,0l0,19.145l-19.186,0l0,-18.201c0,-7.518 1.603,-13.025 4.809,-16.522c3.207,-3.497 7.999,-5.245 14.377,-5.245Z"
+                style="fill-rule: nonzero"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="absolute -bottom-6 -right-6 w-16 h-16">
+            <svg
+              viewBox="0 0 64 64"
+              fill="#800F12"
+              xmlns="http://www.w3.org/2000/svg"
+              style="
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                stroke-linejoin: round;
+                stroke-miterlimit: 2;
+              "
+            >
+              <path
+                d="M36.806,51.968l0,-8.026c2.537,-0.14 4.458,-0.604 5.761,-1.391c1.304,-0.786 2.22,-2.063 2.749,-3.829c0.528,-1.766 0.793,-4.293 0.793,-7.581l-9.303,0l0,-19.147l19.081,0l0,18.203c0,7.519 -1.612,13.028 -4.836,16.525c-3.225,3.497 -7.973,5.246 -14.245,5.246Zm-28.806,0l0,-8.026c2.537,-0.14 4.457,-0.586 5.761,-1.338c1.304,-0.752 2.247,-2.029 2.828,-3.83c0.581,-1.801 0.872,-4.345 0.872,-7.633l-9.461,0l0,-19.147l19.186,0l0,18.203c0,7.519 -1.603,13.028 -4.809,16.525c-3.207,3.497 -7.999,5.246 -14.377,5.246Z"
+                style="fill-rule: nonzero"
+              ></path>
+            </svg>
+          </div>
+
+          <p
+            class="text-xl md:text-2xl leading-snug md:leading-[2.25rem] text-gray-900 font-medium mb-6 md:mb-8 tracking-normal"
+          >
+            “Каждый студент сталкивается с неопределённостью — и именно здесь мы
+            в ILEC берём на себя ответственность. Мы создаём не просто
+            образовательный путь, а стратегию выхода на международный рынок. Это
+            долгосрочная инвестиция в карьеру человека. Мы стремимся к тому,
+            чтобы знания и действия были синхронизированы — только тогда
+            результат становится реальным.”
+          </p>
+
+          <!-- Автор -->
+          <div class="flex items-center gap-4 md:gap-5">
+            <img
+              src="https://randomuser.me/api/portraits/men/32.jpg"
+              alt="Damir Karimov"
+              class="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover border-2 border-[#f0f0f0]"
+            />
+            <div>
+              <p
+                class="font-medium md:font-semibold text-gray-900 text-base md:text-lg"
+              >
+                Дамир Каримов
+              </p>
+              <p class="text-xs md:text-sm text-gray-500">
+                Директор по стратегии · ILEC International
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-gray-100 py-16 md:py-24 px-6">
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch"
+      >
+        <div class="md:col-span-4 flex">
+          <div
+            class="bg-white rounded-2xl p-8 shadow-md border border-gray-200 flex flex-col justify-between w-full h-full"
+          >
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">О нас</h2>
+              <p class="text-gray-700 text-base mb-6 leading-relaxed">
+                Международный образовательный центр ILEC — это команда
+                экспертов, помогающая студентам и молодым специалистам строить
+                карьеру в Европе и за её пределами. Мы фокусируемся на
+                стратегическом подходе: от подбора учебных программ и подготовки
+                документов — до адаптации и трудоустройства.
+              </p>
+              <p class="text-gray-700 text-base mb-6 leading-relaxed">
+                Мы сотрудничаем с университетами и работодателями по всему миру,
+                создавая персонализированные маршруты для каждого. Наша цель —
+                не просто обучение, а построение прочного фундамента для
+                международной карьеры.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="mt-4 w-full inline-flex i
